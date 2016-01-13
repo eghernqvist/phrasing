@@ -1,0 +1,6 @@
+
+    <%= cktext_area_tag("editor#{record.send(:id)}", (record.send(field_name) || record.try(:key)).to_s, { "data-url" => url }) %>
+    <button class="ckable <%= "#{record.send(:id)}" %>" data-url="<%= "#{url}" %>" data-id="<%= id %>">Save</button>
+    <script type="text/javascript">
+      CKEDITOR.add
+    </script>

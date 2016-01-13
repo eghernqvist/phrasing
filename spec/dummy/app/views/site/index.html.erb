@@ -4,8 +4,7 @@
 
 <div><%= t('site.index.footer') %></div>
 
-<div><%= phrase('test', scope: 'models.errors') %></div>
-
-<div><%= phrase 'test', scope: :site %></div>
+<div><%= phrase('test', scope: 'models.errors', editor: :ckeditor, id: '0') %></div>
+<div><%= phrase 'test', scope: :site, editor: :ckeditor, id: '1' %></div>
 
 <div><%= distance_of_time_in_words(Time.now, Time.now) %></div>

@@ -1,4 +1,5 @@
 module InlineHelper
+
 # Normal phrase
 # phrase("headline", url: www.infinum.co/yabadaba, inverse: true, interpolation: {min: 15, max: 20}, scope: "models.errors")
 
@@ -25,8 +26,15 @@ module InlineHelper
 
     url = phrasing_polymorphic_url(record, field_name)
 
-    content_tag(:span, { class: klass, contenteditable: edit_mode_on?, spellcheck: false,   "data-url" => url}) do
-      (record.send(field_name) || record.try(:key)).to_s.html_safe
+    case options[:editor]
+      when :ckeditor
+        render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id]
+        # cktext_area_tag(field_name, (record.send(field_name) || record.try(:key)).to_s)
+        # javascript_tag "alert('hej');"
+      else
+        content_tag(:span, { class: klass, contenteditable: edit_mode_on?, spellcheck: false,   "data-url" => url}) do
+          (record.send(field_name) || record.try(:key)).to_s.html_safe
+        end
     end
   end
 

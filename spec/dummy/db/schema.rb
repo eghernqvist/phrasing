@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20131120000856) do
 
   create_table "phrasing_phrase_versions", force: true do |t|
-    t.string   "phrasing_phrase_id"
+    t.integer  "phrasing_phrase_id"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"

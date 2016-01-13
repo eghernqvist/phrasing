@@ -97,7 +97,6 @@ class PhrasingPhrasesController < Phrasing.parent_controller.constantize
 
   def remote_update_phrase
     klass, attribute = params[:klass], params[:attribute]
-
     if Phrasing.is_whitelisted?(klass, attribute)
       class_object = klass.classify.constantize
       @object = class_object.where(id: params[:id]).first
