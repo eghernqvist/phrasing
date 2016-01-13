@@ -149,6 +149,12 @@ var phrasing_setup = function(){
     $('#edit-mode-onoffswitch').prop('checked', false)
   }
 
+  $('.ck_onclick').on("click", function(e){
+    //this.addClass(' ckeditor');
+    console.log('Hello!');
+    CKEDITOR.add
+  });
+
 };
 
 $(document).ready(phrasing_setup)

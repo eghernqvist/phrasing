@@ -19,19 +19,23 @@ module InlineHelper
   def inline(record, field_name, options={})
     return record.send(field_name).to_s.html_safe unless can_edit_phrases?
 
-    klass = 'phrasable'
-    klass += ' phrasable_on' if edit_mode_on?
-    klass += ' inverse' if options[:inverse]
-    klass += options[:class] if options[:class]
+    klass = ''
 
     url = phrasing_polymorphic_url(record, field_name)
 
     case options[:editor]
       when :ckeditor
-        render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id]
-        # cktext_area_tag(field_name, (record.send(field_name) || record.try(:key)).to_s)
-        # javascript_tag "alert('hej');"
+        klass += "ck_onclick"
+        klass += options[:class] if options[:class]
+        content_tag(:span, { class: klass, contenteditable: edit_mode_on?, spellcheck: false, "data-url" => url, "data-id": options[:id]}) do
+          (record.send(field_name) || record.try(:key)).to_s.html_safe
+        end
+        #render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id]
       else
+        klass += 'phrasable'
+        klass += ' phrasable_on' if edit_mode_on?
+        klass += ' inverse' if options[:inverse]
+        klass += options[:class] if options[:class]
         content_tag(:span, { class: klass, contenteditable: edit_mode_on?, spellcheck: false,   "data-url" => url}) do
           (record.send(field_name) || record.try(:key)).to_s.html_safe
         end
