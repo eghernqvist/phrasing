@@ -1,6 +1,9 @@
-
-    <%= cktext_area_tag("editor#{record.send(:id)}", (record.send(field_name) || record.try(:key)).to_s, { "data-url" => url }) %>
+<%= content_tag(:span, { class: "ck_onclick", id: "inactive#{id}", "data-id": id }) do %>
+    <%= (record.send(field_name) || record.try(:key)).to_s.html_safe %>
+<% end %> 
+<div id="textarea<%= id %>" style="display: none;" data-url="<%= "#{url}" %>" data-id="<%= id %>">
+    <%= cktext_area_tag("editor#{record.send(:id)}", (record.send(field_name) || record.try(:key)).to_s, { "class" => "toggle_content#{id}","data-url" => url, "data-id" => id }) %>
     <button class="ckable <%= "#{record.send(:id)}" %>" data-url="<%= "#{url}" %>" data-id="<%= id %>">Save</button>
-    <script type="text/javascript">
-      CKEDITOR.add
-    </script>
+    <button class="ck_cancel" data-id="<%= id %>">Cancel</button>
+</div>
+

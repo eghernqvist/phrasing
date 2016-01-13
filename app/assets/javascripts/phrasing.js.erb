@@ -103,7 +103,6 @@ var phrasing_setup = function(){
       url: url,
       data: { new_value: content },
       success: function(e){
-        debugger
         trigger_binded_events_for_phrasable_class = 0;
         if(content == "Empty"){
           $('.ckable[data-url="'+ url +'"]').html(content)
@@ -116,6 +115,8 @@ var phrasing_setup = function(){
           $('#phrasing-edit-mode-bubble #phrasing-saved-status-headline p').text("Saved")
           $('#phrasing-saved-status-indicator-circle').css('background-color', '#56AE45')
         }
+        $("#inactive" + $(record).data("id")).html(content);
+        setEditorContent(record, content);
       },
       error: function(e){
         $('#phrasing-edit-mode-bubble #phrasing-saved-status-headline p').text("Error")
@@ -150,10 +151,34 @@ var phrasing_setup = function(){
   }
 
   $('.ck_onclick').on("click", function(e){
-    //this.addClass(' ckeditor');
-    console.log('Hello!');
+    $("#textarea" + $(this).data("id")).show();
+    $("#inactive" + $(this).data("id")).hide();
     CKEDITOR.add
   });
+
+  $('.ck_cancel').on("click", function(e) {
+    var iframe = $(".cke_wysiwyg_frame")[$(this).data("id")];
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    var content = iframeDocument.getElementsByClassName("cke_editable")[0];
+
+    var inactivehtml = $("#inactive" + $(this).data("id")).html();
+
+    setEditorContent(this, inactivehtml);
+    // $("#textarea" + $(this).data("id")).hide();
+    // $(content).html(inactivehtml);
+    // $("#inactive" + $(this).data("id")).show();
+    
+  });
+
+  function setEditorContent(editor, newContent) {
+    var iframe = $(".cke_wysiwyg_frame")[$(editor).data("id")];
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    var content = iframeDocument.getElementsByClassName("cke_editable")[0];
+
+    $(content).html(newContent);
+    $("#textarea" + $(editor).data("id")).hide();
+    $("#inactive" + $(editor).data("id")).show();
+  }
 
 };
 

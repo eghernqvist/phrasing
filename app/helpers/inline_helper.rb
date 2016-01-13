@@ -27,10 +27,7 @@ module InlineHelper
       when :ckeditor
         klass += "ck_onclick"
         klass += options[:class] if options[:class]
-        content_tag(:span, { class: klass, contenteditable: edit_mode_on?, spellcheck: false, "data-url" => url, "data-id": options[:id]}) do
-          (record.send(field_name) || record.try(:key)).to_s.html_safe
-        end
-        #render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id]
+        render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id], klass: klass, options: options
       else
         klass += 'phrasable'
         klass += ' phrasable_on' if edit_mode_on?
