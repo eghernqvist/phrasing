@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20131120000856) do
 
-  create_table "phrasing_phrase_versions", force: true do |t|
-    t.integer  "phrasing_phrase_id"
+  create_table "phrack_phrase_versions", force: :cascade do |t|
+    t.integer  "phrack_phrase_id"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "phrasing_phrases", force: true do |t|
+  create_table "phrack_phrases", force: :cascade do |t|
     t.string   "locale"
     t.string   "key"
     t.text     "value"

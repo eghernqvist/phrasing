@@ -6,6 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require phrasing
+//= require phrack
 //= require ckeditor/init
 //= require_tree .

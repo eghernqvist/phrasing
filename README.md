@@ -1,19 +1,19 @@
-# Phrasing!
+# Phrack!
 
-[![Build Status](https://travis-ci.org/infinum/phrasing.png)](https://travis-ci.org/infinum/phrasing)
+[![Build Status](https://travis-ci.org/infinum/phrack.png)](https://travis-ci.org/infinum/phrack)
 
-![Phrasing](http://www.miataturbo.net/attachments/miata-parts-sale-trade-5/74257-lots-leftovers-near-boston-archer-phrasing2-300x225-jpg?dateline=1366600534)
+![Phrack](http://www.miataturbo.net/attachments/miata-parts-sale-trade-5/74257-lots-leftovers-near-boston-archer-phrack2-300x225-jpg?dateline=1366600534)
 
-Phrasing is a gem for live editing phrases (copy) on websites.
+Phrack is a gem for live editing phrases (copy) on websites.
 
-**Phrasing is currently iterating over release candidates for a major update: 4.0. The Readme for those versions can be found** [here](https://github.com/infinum/phrasing/tree/new-release-4)
+**Phrack is currently iterating over release candidates for a major update: 4.0. The Readme for those versions can be found** [here](https://github.com/infinum/phrack/tree/new-release-4)
 
 ## Installation
 
 Include the gem in your Gemfile
 
 ```ruby
-gem "phrasing"
+gem "phrack"
 ```
 
 Bundle the Gemfile
@@ -25,7 +25,7 @@ bundle install
 Run the install script which will create a migration file and a config file.
 
 ```ruby
-rake phrasing:install
+rake phrack:install
 ```
 
 Migrate your database
@@ -35,12 +35,12 @@ rake db:migrate
 
 ## Setup
 
-The rake task will also generate <tt>phrasing_helper.rb</tt> in your <tt>app/helpers</tt> folder. Here you will need to implement the <tt>can_edit_phrases?</tt> method. Use this to hook-up your existing user authentication system to work with Phrasing.
+The rake task will also generate <tt>phrack_helper.rb</tt> in your <tt>app/helpers</tt> folder. Here you will need to implement the <tt>can_edit_phrases?</tt> method. Use this to hook-up your existing user authentication system to work with Phrack.
 
 For example:
 
 ```ruby
-module PhrasingHelper
+module PhrackHelper
 
   def can_edit_phrases?
     current_user.is_admin?
@@ -48,25 +48,25 @@ module PhrasingHelper
   
 end
 ```
-Include the phrasing **html** initializer at the top of your application layout file.
+Include the phrack **html** initializer at the top of your application layout file.
 
 ```haml
-= render 'phrasing/initializer'
+= render 'phrack/initializer'
 ```
 
 Include the required **javascript** file:
 
 ```javascript
-//= require phrasing
+//= require phrack
 ```
 
 Include the required **stylesheet** file:
 
 ```css
-*= require phrasing
+*= require phrack
 ```
 
-## How to use phrasing?
+## How to use phrack?
 
 You can start adding new phrases by simply adding them in your view file:
 
@@ -80,25 +80,25 @@ In the above example, <tt>@post</tt> is the record with a <tt>title</tt> attribu
 
 ## Security
 
-Since Phrasing can be used to update any attribute in any table (using the model_phrase method), special care must be taken into consideration from a security standpoint.
+Since Phrack can be used to update any attribute in any table (using the model_phrase method), special care must be taken into consideration from a security standpoint.
 
-By default, Phrasing doesn't allow updating of any attribute apart from <tt>PhrasingPhrase.value</tt>. To be able to work with other attributes, you need to whitelist them.
+By default, Phrack doesn't allow updating of any attribute apart from <tt>PhrackPhrase.value</tt>. To be able to work with other attributes, you need to whitelist them.
 
-In the <tt>config/initializers/phrasing.rb</tt> file you can whitelist your model attributes like this:
+In the <tt>config/initializers/phrack.rb</tt> file you can whitelist your model attributes like this:
 
 ```ruby
-Phrasing.white_list = ["Post.title", "Post.body"]
+Phrack.white_list = ["Post.title", "Post.body"]
 ```
 
 or you can whitelist all of them (not recommended) with:
 
 ```ruby
-Phrasing.allow_update_on_all_models_and_attributes = true
+Phrack.allow_update_on_all_models_and_attributes = true
 ```
 
 ## Upgrading from version 2.x to 3.x
 
-In versions 3.0.0 and above we have added the Phrasing Versioning System which requires an additional table, so if you are upgrading to a 3.x release, run <tt>rake phrasing:install</tt> to get the additional migration file, then run <tt>rake db:migrate</tt>.
+In versions 3.0.0 and above we have added the Phrack Versioning System which requires an additional table, so if you are upgrading to a 3.x release, run <tt>rake phrack:install</tt> to get the additional migration file, then run <tt>rake db:migrate</tt>.
 
 ## Turbolinks
 
@@ -107,15 +107,15 @@ If you're experiencing problems with Rails apps using Turbolinks, include the [j
 ```javascript
 //= require jquery
 //= require jquery.turbolinks
-//= require phrasing
+//= require phrack
 //= require turbolinks
 ```
 
-## Phrasing Appearance
+## Phrack Appearance
 
 The `phrase` view helper can take the `options` hash as the last parameter. Features:
 ```ruby
-url: custom_url # point Phrasing to other actions in other controllers
+url: custom_url # point Phrack to other actions in other controllers
 inverse: true # change the hovered background and underline colors to better fit darker backgrounds
 class: custom_class # add custom CSS classes to your phrases to change the appearance of phrases in your application 
 interpolation: { %min: 10 } # add variables to your translations just like w/ I18n
@@ -124,13 +124,13 @@ scope: 'homepage.footer' # add scopes just like you would w/ I18.n. If the first
 
 ## Credits
 
-Phrasing is maintained and sponsored by
+Phrack is maintained and sponsored by
 [Infinum] (http://www.infinum.co).
 
 ![Infinum](https://www.infinum.co/assets/logo_pic-2e19713f50692ed9b0805b199676c19a.png)
 
-Phrasing leverages parts of [Copycat](https://github.com/Zorros/copycat) and [ZenPen](https://github.com/tholman/zenpen/tree/master/).
+Phrack leverages parts of [Copycat](https://github.com/Zorros/copycat) and [ZenPen](https://github.com/tholman/zenpen/tree/master/).
 
 ## License
 
-Phrasing is Copyright © 2013 Infinum. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+Phrack is Copyright © 2013 Infinum. It is free software, and may be redistributed under the terms specified in the LICENSE file.

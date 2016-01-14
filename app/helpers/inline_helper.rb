@@ -6,10 +6,10 @@ module InlineHelper
 # Data model phrase
 # phrase(@record, :title, inverse: true, class: phrase-record-title)
 
-  def phrase(*args)
+  def phrack(*args)
     if args[0].class == String or args[0].class == Symbol
       key, options = args[0].to_s, args[1]
-      phrasing_phrase(key,options || {})
+      phrack_phrase(key,options || {})
     else
       record, field_name, options = args[0], args[1], args[2]
       inline(record, field_name, options || {})
@@ -21,13 +21,13 @@ module InlineHelper
 
     klass = ''
 
-    url = phrasing_polymorphic_url(record, field_name)
+    url = phrack_polymorphic_url(record, field_name)
 
     case options[:editor]
       when :ckeditor
         klass += "ck_onclick"
         klass += options[:class] if options[:class]
-        render "phrasing/ckeditor", record: record, field_name: field_name, url: url, id: options[:id], klass: klass, options: options
+        render "phrack/ckeditor", record: record, field_name: field_name, url: url, id: options[:id], klass: klass, options: options
       else
         klass += 'phrasable'
         klass += ' phrasable_on' if edit_mode_on?
@@ -43,10 +43,10 @@ module InlineHelper
 
   private
 
-    def phrasing_phrase(key, options = {})
+    def phrack_phrase(key, options = {})
       key = options[:scope] ? "#{options[:scope]}.#{key}" : key.to_s
       if can_edit_phrases?
-        @record = PhrasingPhrase.where(key: key, locale: I18n.locale.to_s).first || PhrasingPhrase.search_i18n_and_create_phrase(key)
+        @record = PhrackPhrase.where(key: key, locale: I18n.locale.to_s).first || PhrackPhrase.search_i18n_and_create_phrase(key)
         inline(@record, :value, options)
       else
         options.try(:[], :interpolation) ? t(key, options[:interpolation]).html_safe : t(key).html_safe
@@ -62,8 +62,8 @@ module InlineHelper
       end
     end
 
-    def phrasing_polymorphic_url(record, attribute)
-      remote_update_phrase_phrasing_phrases_path(klass: record.class.to_s, id: record.id, attribute: attribute)
+    def phrack_polymorphic_url(record, attribute)
+      remote_update_phrase_phrack_phrases_path(klass: record.class.to_s, id: record.id, attribute: attribute)
     end
 
 end

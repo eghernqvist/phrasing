@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title Phrack
+    = stylesheet_link_tag "phrack_engine", media: "all"
+    = javascript_include_tag "phrack_engine"
+    = csrf_meta_tag
+    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+  %body
+    #page
+      = render 'phrack/production_warning' if Rails.env.production?
+      = render 'phrack/menu'
+      = render 'phrack/messages'
+      = yield
