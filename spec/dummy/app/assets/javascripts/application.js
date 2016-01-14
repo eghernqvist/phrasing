@@ -7,5 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require phrasing
-//= require_tree .
 //= require ckeditor/init
+//= require_tree .

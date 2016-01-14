@@ -4,7 +4,7 @@
 
 <div><%= t('site.index.footer') %></div>
 
-<div><%= phrase('test', scope: 'models.errors', editor: :ckeditor, id: '0') %></div>
+<div><%= phrase('test', scope: 'models.errors', editor: :ckeditor, id: '0', :ckeditor => {:toolbar => 'simple'}) %></div>
 
 <div><%= phrase 'test', scope: :site, editor: :ckeditor, id: '1' %></div>
 

@@ -5,6 +5,7 @@ require "phrasing/serializer"
 require 'jquery-rails'
 require 'jquery-cookie-rails'
 require 'haml'
+require 'ckeditor'
 
 module Phrasing
   module Rails
